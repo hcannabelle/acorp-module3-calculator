@@ -1,4 +1,9 @@
-//Javascript Calculator Code
+//Create a place to store submitted keys
+let keys = [];
+//Create a place to store submitted keys in the display
+let display = "";
+//Set the default state of the calculator to having not run calculations.
+let hasCalculated = false;
 
 //Get array of numbers from buttons pressed on calculator - first input
 let input1 = [];
