@@ -12,11 +12,100 @@
         integrity="sha384-QYIZto+st3yW+o8+5OHfT6S482Zsvz2WfOzpFSXMF9zqeLcFV0/wlZpMtyFcZALm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
         integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
+    <script src="script.js"></script>
     <title>Calculator</title>
 </head>
 
-<body>
+<body class="bg-silver">
+    <div class="container">
+        <div class="brand p-2 mt-2">
+            <div class="d-flex">
+                <img src="/logo.png" alt="Calculator" width="30" height="30" class="me-2" />
+                <h3 class="text-white">Annabelle's Calculator</h3>
+            </div>
+        </div>
+        <div class="lcd p-1">
+            <div class="card">
+                <div class="card-body text-monospace font-weight-bold text-end">
+                    <h4 id="display"></h4>
+                </div>
+            </div>
+        </div>
 
+        <div class="panel">
+            <div class="row row-cols-2 g-0">
+                <div class="col-8 col-sm-10 col-md-8">
+                    <div class="keypad">
+                        <div class="row row-cols-3 my-1 g-0">
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('7')">7</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('8')">8</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('9')">9</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('4')">4</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('5')">5</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('6')">6</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('1')">1</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('2')">2</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('3')">3</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('0')">0</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-light w-100" onclick="keyPress('.')">.</button>
+                            </div>
+                            <div class="col p-1">
+                                <button type="button" class="btn btn-warning w-100" onclick="clearKeys()">C</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-4 col-sm-2 col-md-4">
+
+                    <div class="row row-cols-2 my-1 g-0">
+                        <div class="col p-1">
+                            <button type="button" class="btn btn-light w-100 fw-bolder"
+                                onclick="keyPress('+')"><strong></strong>&plus;</strong></button>
+                        </div>
+                        <div class="col p-1">
+                            <button type="button" class="btn btn-light w-100 fw-bolder"
+                                onclick="keyPress('-')"><strong></strong>&minus;</strong></button>
+                        </div>
+                        <div class="col p-1">
+                            <button type="button" class="btn btn-light w-100 fw-bolder"
+                                onclick="keyPress('×')"><strong></strong>&times;</strong></button>
+                        </div>
+                        <div class="col p-1">
+                            <button type="button" class="btn btn-light w-100 fw-bolder"
+                                onclick="keyPress('÷')"><strong>&divide;</strong></button>
+                        </div>
+                        <div class="col col-12 p-1">
+                            <button type="button" style="height: 85px" class="btn btn-primary w-100 fw-bolder fs-5"
+                                onclick="keyPress('=')" fw-bolder><strong>&equals;</strong></button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
