@@ -1,80 +1,86 @@
-//Create a place to store submitted keys
+// Create a place to store submitted keys
 let keys = [];
-//Create a place to store submitted keys in the display
+// Create a place to store submitted keys in the display
 let display = "";
-//Set the default state of the calculator to having not run calculations.
+// Set the default state of the calculator to having not run calculations.
 let hasCalculated = false;
 
-//Get array of numbers from buttons pressed on calculator - first input
-let input1 = [];
-const createInput1 = () => {
-  const addToInput1 = createInput1.push();
-  return addToInput1;
-};
+// Update the display with the values of keys pressed into a string
+function updateDisplay() {
+  display = keys.join("");
+  document.getElementById("display").innerHTML = display;
+}
 
-//Get array of "numbers' from buttons pressed on calculator - second input
-let input2 = [];
-const createInput2 = () => {
-  const addToInput2 = input2 + createInput2.push();
-  return addToInput2;
-};
-
-//Get single array of 'number' w no delimeter - first input
-const input1ToSingleArray = () => {
-  const createArray1 = input1.join("");
-  return createArray1;
-};
-
-//Get single array of 'number' w no delimiter - second input
-const input2ToSingleArray = () => {
-  const createArray2 = input2.join("");
-  return createArray2;
-};
-
-//Convert array to integer - first input
-const convertToNum1 = () => {
-  const convertNum1 = createArray1.map(Number);
-  return convertNum1;
-};
-
-//Convert array to integer - second input
-const convertToNum2 = () => {
-  const convertNum2 = createArray2.map(Number);
-  return convertNum2;
-};
-
-const num1 = [];
-const num2 = [];
-
-const solveAddition = (num1, num2) => {
-  const additionSolution = num1 + num2;
-  return additionSolution;
-};
-
-const solveSubtraction = (num1, num2) => {
-  const subtractionSolution = num1 - num2;
-  return subtractionSolution;
-};
-
-const solveDivision = (num1, num2) => {
-  const divisionSolution = num1 / num2;
-  return divisionSolution;
-};
-
-const solveMultiplication = (num1, num2) => {
-  const multiplicationSolution = num1 + num2;
-  return multiplicationSolution;
-};
-
-//Logic to determine which operator should be used against first and second input
-const addOperator = () => {
-  if ((id = "addition")) {
-    return solveAddition();
-  } else if ((id = "subtraction")) {
-    return solveSubtraction();
-  } else if ((id = "division")) {
-    return solveSubtraction();
-  } else {
-    return solveMultiplication();
+function keyPress(key) {
+  // Clear display on key press if a calculation has just occured
+  if (hasCalculated) {
+    clearKeys();
   }
-};
+  // Update display wih key value
+  keys.push(key);
+  updateDisplay();
+  // If key value is equals, calculate result of expression
+  if (key === "=") {
+    calculate();
+  }
+}
+
+// Reset the state of the calculator to empty and update the display
+function clearKeys() {
+  hasCalculated = false;
+  keys = [];
+  updateDisplay();
+}
+
+// Complete calculation. Takes value of display split into an array of two strings based on what operator it contains. Then converts these values into a float and applies mathematical logic
+function calculate() {
+  hasCalculated = true;
+
+  const instructions = display.split(/(?=\+)|(?=\-)|(?=\÷)|(?=\×)|(?=\=)/);
+
+  let result = 0;
+
+  for (const instruction of instructions) {
+    var operator = "+";
+    var firstCharacter = instruction[0];
+    switch (firstCharacter) {
+      case "+":
+        operator = "+";
+        break;
+      case "-":
+        operator = "-";
+        break;
+      case "/":
+      case "÷":
+        operator = "÷";
+        break;
+      case "*":
+      case "×":
+        operator = "×";
+        break;
+    }
+
+    var number = parseFloat(instruction.replace(/[^\d.]/g, ""));
+    if (Number.isNaN(number)) continue;
+
+    switch (operator) {
+      case "+":
+        result += number;
+        break;
+      case "-":
+        result -= number;
+        break;
+      case "÷":
+        result = result / number;
+        break;
+      case "×":
+        result = result * number;
+        break;
+    }
+  }
+  // Updates display to complete expression including result
+  keys.push(result.toString());
+  updateDisplay();
+
+  return result;
+}
