@@ -1,11 +1,12 @@
 // Create a place to store submitted keys
 let keys = [];
-// Create a place to store submitted keys in the display
+// Create a place to store submitted keys as one big string
 let display = "";
-// Set the default state of the calculator to having not run calculations.
+// Set the default state of the calculator to having not run any calculations.
+// We need to reset this when someone does a new calculation
 let hasCalculated = false;
 
-// Update the display with the values of keys pressed into a string
+// Update the display with the values of keys pressed into a string and display it in the #display h4
 function updateDisplay() {
   display = keys.join("");
   document.getElementById("display").innerHTML = display;
@@ -16,28 +17,36 @@ function keyPress(key) {
   if (hasCalculated) {
     clearKeys();
   }
-  // Update display wih key value
+
+  // Add the key to the array and update display
   keys.push(key);
   updateDisplay();
-  // If key value is equals, calculate result of expression
+
+  // If key value is equals, calculate result of user's input
   if (key === "=") {
     calculate();
   }
 }
 
-// Reset the state of the calculator to empty and update the display
+// Reset the state of the calculator to empty and update the display to be empty too
 function clearKeys() {
   hasCalculated = false;
   keys = [];
   updateDisplay();
 }
 
-// Complete calculation. Takes value of display split into an array of two strings based on what operator it contains. Then converts these values into a float and applies mathematical logic
+// Complete calculation.
+// Takes value of display split into an array of two strings based on what operator it contains.
+// Then converts these values into a float and applies mathematical logic
+// This does not do correct BODMAS math rules
 function calculate() {
   hasCalculated = true;
 
+  // Split string into the parts by each operator
+  // This approach was adapted from https://stackoverflow.com/a/47526614
   const instructions = display.split(/(?=\+)|(?=\-)|(?=\÷)|(?=\×)|(?=\=)/);
 
+  // Start with zero
   let result = 0;
 
   for (const instruction of instructions) {
@@ -60,9 +69,11 @@ function calculate() {
         break;
     }
 
+    // Remove any non digits and parse the number
     var number = parseFloat(instruction.replace(/[^\d.]/g, ""));
     if (Number.isNaN(number)) continue;
 
+    // Do the operation
     switch (operator) {
       case "+":
         result += number;
